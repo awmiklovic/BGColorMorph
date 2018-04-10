@@ -8,20 +8,33 @@ var hexToRgb = function hexToRgb(hex) {
   return r + ',' + g + ',' + b;
 };
 
-var isChangeable = function isChangeable(elem) {
-  var windowHeight = document.documentElement.clientHeight;
-  var elemTop = elem.getBoundingClientRect().top;
-  var elemBottom = elemTop + elem.getBoundingClientRect().height;
-  return elemBottom >= windowHeight && elemTop <= 0;
+var isChangeable = function isChangeable(elemTop, elemBottom, startTrigger, endTrigger, windowHeight) {
+  var startFlag = void 0;var endFlag = void 0;
+  //Set start flag
+  if (startTrigger == "top") {
+    startFlag = elemTop <= 0;
+  }
+  if (startTrigger == "middle") {
+    startFlag = elemTop <= windowHeight / 2;
+  }
+  if (startTrigger == "bottom") {
+    startFlag = elemTop <= windowHeight;
+  }
+  //Set end flag
+  if (endTrigger == "top") {
+    endFlag = elemBottom >= 0;
+  }
+  if (endTrigger == "middle") {
+    endFlag = elemBottom >= windowHeight / 2;
+  }
+  if (endTrigger == "bottom") {
+    endFlag = elemBottom >= windowHeight;
+  }
+  return startFlag && endFlag;
 };
 
-var getColorValue = function getColorValue(section, startY, endY) {
-  //using Y = mx + b
-  //get slope, where x is scrollTop position, and Y is R,G,B colorValue
-  var slope = (endY - startY) / (section.getBoundingClientRect().height - document.documentElement.clientHeight);
-  //get the x position
-  var x = parseInt(-1 * section.getBoundingClientRect().top);
-  //calculate y value
+var getColorValue = function getColorValue(startY, endY, deltaX, x) {
+  var slope = (endY - startY) / deltaX;
   var colorValue = Math.round(slope * x + parseInt(startY));
   return colorValue;
 };
@@ -29,6 +42,7 @@ var getColorValue = function getColorValue(section, startY, endY) {
 var bgMorphInit = function bgMorphInit() {
   //Get all bg-morph sections
   var sections = document.querySelectorAll('.bg-morph');
+  var windowHeight = document.documentElement.clientHeight;
   //If there are BG Morph Sections
   if (sections) {
     //Set RGB data on the elements
@@ -52,24 +66,50 @@ var bgMorphInit = function bgMorphInit() {
       var endB = endRgbArray[2];
       //Set initial BG Color for each section
       section.setAttribute('style', 'background-color:rgb(' + startR + ',' + startG + ',' + startB + ');');
-      //Bind color update to scroll event
-      window.addEventListener('scroll', function (e) {
-        //Get all sections
-        var groupSections = Array.from(document.getElementsByClassName('bg-morph-group'));
-        //Only update the RGB values for the section that is in the viewport
-        if (isChangeable(section)) {
-          var newR = getColorValue(section, startR, endR);
-          var newG = getColorValue(section, startG, endG);
-          var newB = getColorValue(section, startB, endB);
-          //Set new BG Color for every section to ensure seamless boundaries
-          if (groupSections.length > 0 && section.classList.contains('bg-morph-group')) {
-            groupSections.forEach(function (item) {
-              item.setAttribute('style', 'background-color:rgb(' + newR + ',' + newG + ',' + newB + ');');
-            });
-          }
-          section.setAttribute('style', 'background-color:rgb(' + newR + ',' + newG + ',' + newB + ');');
+      //Set Values required for calculating new RGB values
+      var sectionHeight = section.getBoundingClientRect().height;
+      var startTrigger = section.getAttribute('data-start-trigger');
+      var endTrigger = section.getAttribute('data-end-trigger');
+      //using Y = mx + b
+      //m = endY - startY / deltaX
+      //deltaX is how far from trigger point that final RGB value gets set.
+      //This calculates deltaX.
+      var deltaX = windowHeight;
+      if (startTrigger != endTrigger) {
+        if (startTrigger == "middle" || endTrigger == "middle") {
+          deltaX = deltaX / 2;
         }
-      });
+        if (startTrigger == "top" || endTrigger == "bottom") {
+          deltaX = -deltaX;
+        }
+        deltaX = sectionHeight + deltaX;
+      } else deltaX = sectionHeight;
+      //Bind color update to scroll event
+      setInterval(function () {
+        var sectionTop = section.getBoundingClientRect().top;
+        //Get all sections
+        //Only update the RGB values for the section that is in the viewport
+        if (isChangeable(sectionTop, sectionTop + sectionHeight, startTrigger, endTrigger, windowHeight)) {
+          //get the scroll position past the trigger point.
+          var x = void 0;
+          if (startTrigger == "top") {
+            x = -1 * sectionTop;
+          }
+          if (startTrigger == "middle") {
+            x = -1 * (sectionTop - windowHeight / 2);
+          }
+          if (startTrigger == "bottom") {
+            x = -1 * (sectionTop - windowHeight);
+          }
+          var newR = getColorValue(startR, endR, deltaX, x);
+          var newG = getColorValue(startG, endG, deltaX, x);
+          var newB = getColorValue(startB, endB, deltaX, x);
+          //Change BG Color
+          window.requestAnimationFrame(function () {
+            section.setAttribute('style', 'background-color:rgb(' + newR + ',' + newG + ',' + newB + ');');
+          });
+        }
+      }, 100);
     });
   }
 };

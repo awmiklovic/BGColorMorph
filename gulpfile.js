@@ -12,6 +12,8 @@ gulp.task('scripts', function(){
 		.pipe(uglify())
 		.pipe(rename({ extname: '.min.js' }))
 	    .pipe(gulp.dest('dist'));
+	gulp.src('src/*.css')
+		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('default', ['scripts']);

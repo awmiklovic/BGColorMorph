@@ -1,0 +1,5 @@
+.bg-morph{
+  transition-property:background;
+  transition:.2s;
+  transition-timing-function: linear;
+}

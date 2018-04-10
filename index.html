@@ -1,13 +1,174 @@
 <!DOCTYPE html>
-<html>
+	<html>
+		<head>
+			<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+			<link href="dist/bg-color-morph.css" rel="stylesheet">
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/themes/prism.css" rel="stylesheet">
 
-<head>
-  <title>Page Title</title>
-</head>
+		</head>
 
-<body>
-<h1>Title</h1>
-The content of the document......
-</body>
+		<body>
+			<script src="dist/bg-color-morph.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/prism.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/components/prism-markup.js"></script>
+			<style>
+				body{
+					margin:0px;
+				}
 
-</html>
+				.container{
+				  max-width:90%;
+				  line-height:2;
+				  font-size:20px;
+				  padding:100px;
+				  margin-left:auto;
+				  margin-right:auto;
+				}
+
+				h1{
+				  font-family:"Oswald";
+				  font-size:75px;
+				  text-align:center;
+				  color:white;
+				}
+
+				h2{
+				  font-family:"Oswald";
+				  font-size:42px;
+				}
+
+				.container.light p{
+				  color:white;
+				  font-family:"Open Sans";
+				}
+
+			</style>
+
+			<section class="bg-morph" data-end-color="#00F260" data-start-color="#0575E6" data-start-trigger="top" data-end-trigger="top">
+			  <div class="container">
+			    <h1>BGColorMorph</h1>
+			  </div>  
+			</section>
+
+			<section>
+			  <div class="container">
+			    <h2>Getting Started</h2>
+			    <pre>
+			      <code class="language-markup">
+			&lt;script src="/dist/bg-color-morph.js">&lt;/script>
+			&lt;link rel="stylesheet" href="/dist/bg-color-morph.css" />
+			      </code>
+			    </pre>
+			    <pre>
+			      <code class="language-markup">
+&lt;section
+	class="bg-morph"
+	data-start-color="#f7b733"
+	data-end-color="#fc4a1a"
+	data-start-trigger="middle"
+	data-end-trigger="middle">
+	&lt;h1>Section Content&lt;/h1>
+&lt;/section>
+			      </code>
+			    </pre>
+			  </div>
+			</section>
+
+			<section class="bg-morph" data-end-color="#f7b733" data-start-color="#fc4a1a" data-start-trigger="middle" data-end-trigger="middle">
+			  <div class="container">
+			    <h1>Section Content</h1>
+			  </div>  
+			</section>
+
+			<section>
+				<div class="container">
+					<h2>Start and End Triggers</h2>
+					<p>Select where the color change starts and finishes. Options are top, middle, and bottom of viewport.
+					<pre>
+				    	<code class="language-markup">
+&lt;section
+	class="bg-morph"
+	data-start-color="#f7b733"
+	data-end-color="#fc4a1a"
+	data-start-trigger="top"
+	data-end-trigger="bottom">
+	&lt;h1>Section Content&lt;/h1>
+	&lt;p>Lorem ipsum dolor...&lt;/p>
+&lt;/section>
+				    	</code>
+					</pre>
+				</div>
+			</section>
+
+			<section class="bg-morph" data-start-color="#00F260" data-end-color="#0575E6" data-start-trigger="middle" data-end-trigger="middle">
+			  <div class="container light">
+			    <h1>Section Content</h1>
+			    <p>Lorem ipsum dolor amet hot chicken fingerstache normcore thundercats forage irony church-key keffiyeh copper mug prism. Lomo stumptown letterpress PBR&B. Stumptown butcher gastropub echo park marfa, neutra tote bag DIY hammock leggings keffiyeh kale chips. Stumptown photo booth distillery quinoa art party tacos beard, synth VHS glossier wolf yr slow-carb.</p>
+			     <p>Lorem ipsum dolor amet hot chicken fingerstache normcore thundercats forage irony church-key keffiyeh copper mug prism. Lomo stumptown letterpress PBR&B. Stumptown butcher gastropub echo park marfa, neutra tote bag DIY hammock leggings keffiyeh kale chips. Stumptown photo booth distillery quinoa art party tacos beard, synth VHS glossier wolf yr slow-carb.</p>
+			    <p>Lorem ipsum dolor amet hot chicken fingerstache normcore thundercats forage irony church-key keffiyeh copper mug prism. Lomo stumptown letterpress PBR&B. Stumptown butcher gastropub echo park marfa, neutra tote bag DIY hammock leggings keffiyeh kale chips. Stumptown photo booth distillery quinoa art party tacos beard, synth VHS glossier wolf yr slow-carb.</p>
+			  </div>
+			</section>
+
+			<section>
+			  <div class="container">
+			    <h2>Cascade Them</h2>
+			    <pre>
+			      <code class="language-markup">
+&lt;section
+	class="bg-morph"
+	data-start-color="#ffffff"
+	data-end-color="#fc4a1a"
+	data-start-trigger="bottom"
+	data-end-trigger="bottom">
+	&lt;h1>Section Content&lt;/h1>
+&lt;/section>
+&lt;section
+	class="bg-morph"
+	data-start-color="#ffffff"
+	data-end-color="#0575E6"
+	data-start-trigger="bottom"
+	data-end-trigger="bottom">
+	&lt;h1>Section Content&lt;/h1>
+&lt;/section>
+&lt;section
+	class="bg-morph"
+	data-start-color="#ffffff"
+	data-end-color="#00F260"
+	data-start-trigger="bottom"
+	data-end-trigger="bottom">
+	&lt;h1>Section Content&lt;/h1>
+&lt;/section>
+			      </code>
+			    </pre>
+			  </div>
+			</section>
+
+			<section class="bg-morph" data-start-color="#ffffff" data-end-color="#fc4a1a" data-start-trigger="bottom" data-end-trigger="bottom">
+				<div class="container">
+					<h1>BGColorMorph</h1>
+				</div>  
+			</section>
+			<section class="bg-morph" data-start-color="#ffffff" data-end-color="#0575E6" data-start-trigger="bottom" data-end-trigger="bottom">
+				<div class="container">
+					<h1>BGColorMorph</h1>
+				</div>  
+			</section>
+			<section class="bg-morph" data-start-color="#ffffff" data-end-color="#00F260" data-start-trigger="bottom" data-end-trigger="bottom">
+				<div class="container">
+					<h1>BGColorMorph</h1>
+				</div>  
+			</section>
+
+			<section>
+			<div class="container">
+				<h2>Enjoy!</h2>
+				<pre>
+				  <code class="language-markup">
+Repository: https://github.com/awmiklovic/BGColorMorph
+Contact: awmiklovic@gmail.com
+				  </code>
+				</pre>
+			</div>
+			</section>
+		</body>
+	</html>
