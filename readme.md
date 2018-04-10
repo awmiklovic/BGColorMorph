@@ -1,6 +1,6 @@
 # Background Color Morph
 
-Scroll between two background colors on any element. <a href="https://github.com/awmiklovic/BGColorMorph" target="_blank">View Demo</a>.
+Scroll between two background colors on any element. <a href="https://awmiklovic.github.io/BGColorMorph/" target="_blank">View Demo</a>.
 
 ## Getting Started
 
@@ -8,11 +8,12 @@ Download the project directory or install via Bower.
 
 ### Bower
 
-You can install the package via bower
 
 ```
 $bower install bg-color-morph
 ```
+
+## Set up
 
 Link the scripts in your head
 
@@ -21,9 +22,6 @@ Link the scripts in your head
 <link rel="stylesheet" href="/dist/bg-color-morph.css" />
 			      
 ```
-
-
-## Set up
 
 Create a bg-color-morph effect on any element by adding the class "bg-morph" to the element, and setting the attributes: "data-start-color", "data-end-color", "data-start-trigger", "data-end-trigger".
 
@@ -56,4 +54,4 @@ Each bg-morph element can both start and end its morph at either the top, middle
 
 ### Examples
 
-See it in action with more examples at the demo site: https://github.com/awmiklovic/BGColorMorph
+See it in action with more examples at the demo site: https://awmiklovic.github.io/BGColorMorph/
