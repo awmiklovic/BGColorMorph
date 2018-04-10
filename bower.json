@@ -1,0 +1,17 @@
+{
+  "name": "bg-color-morph",
+  "description": "Scroll effect that morphs background colors.",
+  "main": "bg-color-morph.js",
+  "authors": [
+    "Alex Miklovic <awmiklovic@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/awmiklovic/BGColorMorph",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
