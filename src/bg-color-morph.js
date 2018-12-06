@@ -1,3 +1,4 @@
+// Helper Function for converting Hex Values to RGB
 const hexToRgb = hex => {
 	hex = hex.replace('#','');
 	const r = parseInt(hex.substring(0, 2), 16);
@@ -6,6 +7,7 @@ const hexToRgb = hex => {
 	return r+','+g+','+b;
 }
 
+// Checking if a section is in view and past the trigger point.
 const isChangeable = (elemTop, elemBottom, startTrigger, endTrigger, windowHeight) => {
     let startFlag; let endFlag;
     //Set start flag
@@ -31,12 +33,14 @@ const isChangeable = (elemTop, elemBottom, startTrigger, endTrigger, windowHeigh
     return (startFlag && endFlag);
 }
 
+// Simple y = mx + b to get a value between 0 and 255.
 const getColorValue = (startY, endY, deltaX, x) =>{
   const slope = (endY - startY) / deltaX;
   const colorValue = Math.round((slope * x) + parseInt(startY));
   return colorValue;
 }
 
+//Start Here
 const bgMorphInit = () => {
   //Get all bg-morph sections
   const sections = document.querySelectorAll('.bg-morph');
@@ -105,7 +109,7 @@ const bgMorphInit = () => {
           //Change BG Color
           window.requestAnimationFrame(function(){
             section.setAttribute('style','background-color:rgb('+newR+','+newG+','+newB+');');
-          }); 
+          });
         }
       }, 100);
     });

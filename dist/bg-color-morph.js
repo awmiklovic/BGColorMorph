@@ -1,5 +1,6 @@
 'use strict';
 
+// Helper Function for converting Hex Values to RGB
 var hexToRgb = function hexToRgb(hex) {
   hex = hex.replace('#', '');
   var r = parseInt(hex.substring(0, 2), 16);
@@ -8,6 +9,7 @@ var hexToRgb = function hexToRgb(hex) {
   return r + ',' + g + ',' + b;
 };
 
+// Checking if a section is in view and past the trigger point.
 var isChangeable = function isChangeable(elemTop, elemBottom, startTrigger, endTrigger, windowHeight) {
   var startFlag = void 0;var endFlag = void 0;
   //Set start flag
@@ -33,12 +35,14 @@ var isChangeable = function isChangeable(elemTop, elemBottom, startTrigger, endT
   return startFlag && endFlag;
 };
 
+// Simple y = mx + b to get a value between 0 and 255.
 var getColorValue = function getColorValue(startY, endY, deltaX, x) {
   var slope = (endY - startY) / deltaX;
   var colorValue = Math.round(slope * x + parseInt(startY));
   return colorValue;
 };
 
+//Start Here
 var bgMorphInit = function bgMorphInit() {
   //Get all bg-morph sections
   var sections = document.querySelectorAll('.bg-morph');
